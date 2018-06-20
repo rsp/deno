@@ -3,6 +3,11 @@ import("//v8/gni/v8.gni")
 import("//v8/snapshot_toolchain.gni")
 import("deno.gni")
 
+config("deno_config") {
+  include_dirs = [ "v8" ] # This allows us to v8/src/base/ libraries.
+  configs = [ "v8:external_config" ]
+}
+
 rust_executable("deno_rs") {
   source_root = "main.rs"
   rust_deps = [ ":libc" ]
@@ -19,7 +24,7 @@ rust_library("libc") {
   ]
 }
 
-v8_executable("deno") {
+executable("deno") {
   sources = [
     "main.cc",
   ]
@@ -28,10 +33,10 @@ v8_executable("deno") {
     ":msg_proto",
     "//third_party/protobuf:protoc_lib",
   ]
-  configs = [ ":deno_config" ]
+  configs += [ ":deno_config" ]
 }
 
-v8_executable("mock_runtime_test") {
+executable("mock_runtime_test") {
   testonly = true
   sources = [
     "file_util_test.cc",
@@ -44,10 +49,10 @@ v8_executable("mock_runtime_test") {
     "//testing/gtest:gtest",
   ]
   defines = [ "DENO_MOCK_RUNTIME" ]
-  configs = [ ":deno_config" ]
+  configs += [ ":deno_config" ]
 }
 
-v8_static_library("libdeno") {
+static_library("libdeno") {
   complete_static_lib = true
   sources = [
     "from_snapshot.cc",
@@ -56,7 +61,7 @@ v8_static_library("libdeno") {
     ":create_snapshot_deno",
     ":deno_nosnapshot",
   ]
-  configs = [ ":deno_config" ]
+  configs += [ ":deno_config" ]
 }
 
 v8_source_set("deno_nosnapshot") {
@@ -76,19 +81,14 @@ v8_source_set("deno_nosnapshot") {
   configs = [ ":deno_config" ]
 }
 
-config("deno_config") {
-  include_dirs = [ "v8" ] # This allows us to v8/src/base/ libraries.
-  configs = [ "v8:external_config" ]
-}
-
-v8_executable("snapshot_creator") {
+executable("snapshot_creator") {
   sources = [
     "snapshot_creator.cc",
   ]
   deps = [
     ":deno_nosnapshot",
   ]
-  configs = [ ":deno_config" ]
+  configs += [ ":deno_config" ]
 }
 
 proto_library("msg_proto") {
