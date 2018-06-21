@@ -7,9 +7,10 @@ cache:
   directories:
    - deno2/js/node_modules/
    - $DEPOT_TOOLS_PATH
+   - $BUILD_PATH
 env:
   global:
-    - BUILD_PATH=$HOME/out/Debug
+    - BUILD_PATH=$HOME/out/Default
     - DEPOT_TOOLS_PATH=$HOME/depot_tools
 before_install: |
   if ! [ -x $DEPOT_TOOLS_PATH/gclient ]; then
@@ -22,8 +23,8 @@ install:
  - cd deno2
  - gclient sync --no-history
  - (cd js; yarn)
- - gn gen $BUILD_PATH 
+ - gn gen $BUILD_PATH
  - gn args $BUILD_PATH --list
- - ninja -v -j3 -C $BUILD_PATH mock_runtime_test 
+ - ninja -v -j3 -C $BUILD_PATH mock_runtime_test
 script:
  - $BUILD_PATH/mock_runtime_test
