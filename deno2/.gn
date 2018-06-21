@@ -26,11 +26,14 @@ default_args = {
   use_gio = false
   use_glib = false
   use_udev = false
+  use_x11 = false
+  use_nss_certs = false
+  use_ozone = false
 
   # Flags to coax Travis into building.
   libcpp_is_static = false
-  use_custom_libcxx = false
-  use_sysroot = false
+  #use_custom_libcxx = false
+  #use_sysroot = false
 
   is_component_build = false
   symbol_level = 1
