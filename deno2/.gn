@@ -8,7 +8,7 @@ buildconfig = "//build/config/BUILDCONFIG.gn"
 # The secondary source root is a parallel directory tree where
 # GN build files are placed when they can not be placed directly
 # in the source tree, e.g. for third party source trees.
-secondary_source = "//v8/"
+#secondary_source = "//v8/"
 
 # These are the targets to check headers for by default. The files in targets
 # matching these patterns (see "gn help label_pattern" for format) will have
@@ -25,10 +25,10 @@ default_args = {
   use_dbus = false
   use_gio = false
   use_glib = false
-  use_udev = false
-  use_x11 = false
   use_nss_certs = false
   use_ozone = false
+  use_udev = false
+  use_x11 = false
 
   # Flags to coax Travis into building.
   #libcpp_is_static = false
