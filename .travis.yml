@@ -29,6 +29,6 @@ install:
  - (cd js; yarn)
  - gn gen $BUILD_PATH --args='cc_wrapper="ccache"'
  - gn args $BUILD_PATH --list
- - ninja -v -j3 -C $BUILD_PATH mock_runtime_test
+ - ninja -j2 -C $BUILD_PATH mock_runtime_test
 script:
  - $BUILD_PATH/mock_runtime_test
