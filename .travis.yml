@@ -18,7 +18,6 @@ before_install: |
     git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git $DEPOT_TOOLS_PATH
   fi
 install:
- - env
  - export PATH=$PATH:$DEPOT_TOOLS_PATH
  - cd deno2
  - gclient sync --no-history
@@ -29,6 +28,9 @@ install:
  - (cd js; yarn)
  - gn gen $BUILD_PATH --args='cc_wrapper="ccache"'
  - gn args $BUILD_PATH --list
- - ninja -j2 -C $BUILD_PATH mock_runtime_test
+ - env
+ - ccache -s
+ - ninja -j2 -C $BUILD_PATH mock_runtime_test deno
 script:
  - $BUILD_PATH/mock_runtime_test
+ - $BUILD_PATH/deno
