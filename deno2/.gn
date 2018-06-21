@@ -31,7 +31,7 @@ default_args = {
   use_ozone = false
 
   # Flags to coax Travis into building.
-  libcpp_is_static = false
+  #libcpp_is_static = false
   #use_custom_libcxx = false
   #use_sysroot = false
 
