@@ -73,10 +73,7 @@ v8_source_set("deno_nosnapshot") {
     "include/deno.h",
   ]
   deps = [
-    "v8:v8",
-    "v8:v8_libbase",
-    "v8:v8_libplatform",
-    "v8:v8_libsampler",
+    "v8:v8_monolith",
   ]
   configs = [ ":deno_config" ]
 }
