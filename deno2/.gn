@@ -39,6 +39,9 @@ default_args = {
   symbol_level = 1
   #treat_warnings_as_errors = false
 
+  # https://cs.chromium.org/chromium/src/docs/ccache_mac.md
+  clang_use_chrome_plugins = false
+
   v8_deprecation_warnings = false
   v8_embedder_string = "-deno"
   v8_enable_gdbjit = false
